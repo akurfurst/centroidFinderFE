@@ -1,10 +1,12 @@
-import { fetchURL } from "image-js";
+import { Image, fetchURL } from "image-js";
 import distance from "./colorDistance";
 
 export default async function toBinaryImage(imagePath, targetColor, threshold){
     const image = await fetchURL(`http://localhost:4002/thumbnail/${imagePath}`);
     const binaryArray = toBinaryArray(image, targetColor, threshold);
-    console.log(binaryArray);
+    const binaryImage = toImage(binaryArray);
+    console.log(binaryImage);
+    return binaryImage;
 }
 
 function toBinaryArray(image, targetColor, threshold){ 
@@ -24,5 +26,15 @@ function toBinaryArray(image, targetColor, threshold){
 }
 
 function toImage(binaryArray){
-    
+    const height = binaryArray.length;
+    const width = binaryArray[0].length;
+    const image = new Image(width, height, {colorModel: 'GREY', bitDepth: 8});
+    for(let y = 0; y < height; y++){
+        for(let x = 0; x < width; x++){
+            const brightness = binaryArray[y][x] === 1 ? 255 : 0;
+            image.setPixel(x, y, [brightness]);
+        }
+    }
+    return image
+
 }
