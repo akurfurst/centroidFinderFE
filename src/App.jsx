@@ -1,10 +1,15 @@
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router";
+import PreviewPage from "./pages/PreviewPage.jsx";
 
 function App() {
 
   return (
     <>
-      <h1>Video Processor App</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<PreviewPage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
