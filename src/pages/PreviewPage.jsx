@@ -5,7 +5,7 @@ import { writeCanvas } from 'image-js';
 import toBinaryImage from "../BinaryImage/toBinaryImage.js";
 
 export default function PreviewPage() {
-    const [color, setTargetColor] = useState("000000");
+    const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
 
     //test binary image
@@ -14,12 +14,12 @@ export default function PreviewPage() {
         const canvas = canvasRef.current;
     
         async function showImage() {
-          const image = await toBinaryImage('moving-centroid.mp4', 0xFDA301, 162); 
+          const image = await toBinaryImage('moving-centroid.mp4', color.slice(1), threshold); 
           writeCanvas(image, canvas); 
         }
     
         showImage().catch(console.error);
-      }, []);
+      }, [threshold, color]);
 
     return (
         <>

@@ -5,7 +5,7 @@ export default async function toBinaryImage(imagePath, targetColor, threshold){
     const image = await fetchURL(`http://localhost:4002/thumbnail/${imagePath}`);
     const binaryArray = toBinaryArray(image, targetColor, threshold);
     const binaryImage = toImage(binaryArray);
-    console.log(binaryImage);
+    console.log(targetColor);
     return binaryImage;
 }
 
