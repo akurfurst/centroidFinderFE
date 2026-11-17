@@ -1,8 +1,7 @@
-export default function distance(colorA, colorB){
+export default function distance(colorA, r, g, b){
     const rgb1 = toRGB(colorA);
-    const rgb2 = toRGB(colorB);
     //sqrt((r1 - r2)^2 + (g1 - g2)^2 + (b1 - b2)^2)
-    return Math.sqrt(Math.pow((rgb1.red - rgb2.red), 2) + Math.pow((rgb1.green - rgb2.green), 2) + Math.pow((rgb1.blue - rgb2.blue), 2))
+    return Math.sqrt(Math.pow((rgb1.red - r), 2) + Math.pow((rgb1.green - g), 2) + Math.pow((rgb1.blue - b), 2))
 }
 
 function toRGB(color){
