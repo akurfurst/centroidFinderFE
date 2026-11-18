@@ -20,6 +20,21 @@ function dfs(image, startX, startY, visited){
 
 //returns a list of valid moves at current x and y [[x, y]]
 function possibleMoves(image, currX, currY){
+    const moves = [];
+    const directions = [
+        [-1, 0],
+        [1, 0],
+        [0, -1],
+        [0, 1]
+    ];
 
+    for(let dir of directions){
+        const x = currX + dir[0];
+        const y = currY + dir[1];
+        if(y < 0 || y >= image.length || x < 0 || x >= image[0].length) continue;
+        possibleMoves.push([x, y]);
+    }
+
+    return moves;
 }
 
