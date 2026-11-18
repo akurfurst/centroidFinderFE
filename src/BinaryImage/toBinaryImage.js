@@ -1,8 +1,7 @@
-import { Image, fetchURL } from "image-js";
+import { Image } from "image-js";
 import distance from "./colorDistance";
 
-export default async function toBinaryImage(imagePath, targetColor, threshold){
-    const image = await fetchURL(`http://localhost:4002/thumbnail/${imagePath}`);
+export default function toBinaryImage(image, targetColor, threshold){
     const binaryArray = toBinaryArray(image, targetColor, threshold);
     const binaryImage = toImage(binaryArray);
     //console.log(targetColor);

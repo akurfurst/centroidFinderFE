@@ -9,7 +9,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<PreviewPage />} />
+          <Route index element={<PreviewPage videoPath={"moving-centroid.mp4"} />} />
         </Routes>
       </BrowserRouter>
     </>
