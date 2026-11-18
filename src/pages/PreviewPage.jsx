@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useParams } from "react-router";
+
+import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
+import toBinaryImage from "../BinaryImage/toBinaryImage.js";
+
 import Controls from "../components/Controls.jsx";
 import ImagePreview from "../components/ImagePreview.jsx";
-import toBinaryImage from "../BinaryImage/toBinaryImage.js";
 import Preview from "../components/Preview.jsx";
-import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
 
 export default function PreviewPage() {
     const { videoPath } = useParams();
