@@ -18,12 +18,14 @@ export default function PreviewPage({ videoPath }) {
 
     return (
         <>
-            <h1>Video Processor App</h1>
-            <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
-            <Preview loading={loading} error={error}>
-                <ImagePreview image={image} />
-                <ImagePreview image={binarizedImage} />
-            </Preview>
+            <main>
+                <h1>Video Processor App</h1>
+                <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
+                <Preview loading={loading} error={error}>
+                    <ImagePreview image={image} />
+                    <ImagePreview image={binarizedImage} />
+                </Preview>
+            </main>
         </>
     )
 }

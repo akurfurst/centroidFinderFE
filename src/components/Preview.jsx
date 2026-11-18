@@ -9,7 +9,7 @@ export default function Preview({loading, error, children }) {
     )
 
     return (
-        <div>
+        <div className="preview">
             {children}
         </div>
     )

@@ -1,3 +1,22 @@
+:root {
+  --background: rgb(248,248,248);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  background-color: var(--background);
+  margin: 1rem auto;
+  padding: 2rem 1rem;
+  width: 75%;
+}
+
 .controls {
   display: flex;
   align-content: center;
@@ -18,4 +37,9 @@
 
 .control input {
   margin: 0.25rem;
+}
+
+.preview {
+  display: flex;
+  gap: 1rem;
 }
