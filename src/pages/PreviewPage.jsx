@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 import Controls from "../components/Controls.jsx";
 import ImagePreview from "../components/ImagePreview.jsx";
 import toBinaryImage from "../BinaryImage/toBinaryImage.js";
 import Preview from "../components/Preview.jsx";
 import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
 
-export default function PreviewPage({ videoPath }) {
+export default function PreviewPage() {
+    const { videoPath } = useParams();
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
     

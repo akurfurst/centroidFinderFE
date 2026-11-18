@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import PreviewPage from "./pages/PreviewPage.jsx";
+import Videos from "./pages/Videos.jsx";
 
 
 
@@ -9,7 +10,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route index element={<PreviewPage videoPath={"moving-centroid.mp4"} />} />
+          <Route path="videos/:videoPath" element={<PreviewPage />} />
+          <Route path="videos" element={<Videos />} />
           <Route path="failure" element={<PreviewPage videoPath={"null"} />} />
         </Routes>
       </BrowserRouter>
