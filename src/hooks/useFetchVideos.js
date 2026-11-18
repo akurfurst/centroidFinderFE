@@ -15,7 +15,6 @@ export default function useFetchVideos() {
                 const response = await fetch(`/api/videos`);
                 if (!response.ok) throw new Error("Failed to get videos");
                 const data = await response.json();
-                console.log(data);
                 if (!ignore) setVideos(data);
             } catch (e) {
                 console.error(e);
