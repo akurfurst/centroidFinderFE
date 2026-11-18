@@ -14,7 +14,7 @@ export default function PreviewPage() {
         const canvas = canvasRef.current;
     
         async function showImage() {
-          const image = await toBinaryImage('moving-centroid.mp4', color.slice(1), threshold); 
+          const image = await toBinaryImage('moving-centroid.mp4', parseInt(color.slice(1), 16), threshold); 
           writeCanvas(image, canvas); 
         }
     
