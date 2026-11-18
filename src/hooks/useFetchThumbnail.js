@@ -14,7 +14,7 @@ export default function useFetchThumbnail(videoPath) {
 
             try {
                 // fetchURL does not return a response, it returns the image itself
-                const image = await fetchURL(`http://localhost:4002/thumbnail/${videoPath}`);
+                const image = await fetchURL(`/thumbnail/${videoPath}`);
                 if (!ignore) setImage(image);
             } catch (e) {
                 console.error(e);
