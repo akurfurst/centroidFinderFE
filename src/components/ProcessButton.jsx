@@ -1,6 +1,6 @@
 
 
-export default function ProcessButton({handelClick, error}){
+export default function ProcessButton({handleClick}){
     //const nav = useNavigate();
     
     // useEffect(() => {
@@ -11,9 +11,7 @@ export default function ProcessButton({handelClick, error}){
 
     return(
         <div className="process-button">
-            <button onClick={() => handelClick()}>Process Video</button>
-
-            {error && <p>Error: {error}</p>}
+            <button onClick={() => handleClick()}>Process Video</button>
         </div>
     );
 }
