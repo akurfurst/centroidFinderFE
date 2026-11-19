@@ -1,6 +1,7 @@
 :root {
   --background: rgb(248,248,248);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
 }
 
 body {
@@ -14,7 +15,7 @@ main {
   background-color: var(--background);
   margin: 1rem auto;
   padding: 2rem 1rem;
-  width: 75%;
+  width: 1400px;
 }
 
 .controls {
@@ -41,5 +42,29 @@ main {
 
 .preview {
   display: flex;
-  gap: 1rem;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 2rem;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  height: fit-content;
+  max-width: 45%;
+}
+
+.image-preview canvas {
+  width:100%;
+}
+
+input {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+ul {
+  display:flex;
+  flex-direction: column;
 }
