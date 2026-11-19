@@ -30,6 +30,11 @@ export default function PreviewPage() {
     const centroids = (image == null) ? null : groupFinder(image, hexColor, threshold);
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
 
+    //handel process click
+    function handelClick(){
+        setUrl(`http://localhost:4002/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`)
+    }
+
     return (
         <>
             <main>
@@ -42,7 +47,7 @@ export default function PreviewPage() {
                     <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
-                <ProcessButton videoPath={videoPath} targetColor={hexColor} threshold={threshold} setUrl={setUrl} error={postError}/>
+                <ProcessButton handelClick={handelClick} error={postError}/>
             </main>
         </>
     )
