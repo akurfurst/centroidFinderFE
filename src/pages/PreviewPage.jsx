@@ -24,7 +24,6 @@ export default function PreviewPage() {
     // Get centroids to draw circle at largest centroid.
     const centroids = (image == null) ? null : groupFinder(image, hexColor, threshold);
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
-    console.log(largestCentroid);
 
     return (
         <>

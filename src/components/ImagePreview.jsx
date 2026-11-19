@@ -7,13 +7,8 @@ export default function ImagePreview({image, largestCentroid}){
     useEffect(() => {
         const canvas = canvasRef.current;
         writeCanvas(image, canvas)    
-    }, [image]);
 
-    // Draw circle around largest centroid
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        //console.log(largestCentroid);
+        //Draw circle around largest centroid
         if(!canvas || !largestCentroid){
             return
         }
@@ -26,8 +21,8 @@ export default function ImagePreview({image, largestCentroid}){
         ctx.strokeStyle = '#199a19d8';
         ctx.lineWidth = 10;
         ctx.stroke();
-    }, [largestCentroid, image]);
-    
+    }, [image, largestCentroid]);
+
     return(
         <div className="image-preview">
             <canvas ref={canvasRef} aria-label="Preview Image" />
