@@ -8,6 +8,10 @@ export default function toBinaryImage(image, targetColor, threshold){
     return binaryImage;
 }
 
+export function getBinaryArray(image, targetColor, threshold){
+    return toBinaryArray(image, targetColor, threshold);
+}
+
 function toBinaryArray(image, targetColor, threshold){ 
     const binaryArray = [];
 
