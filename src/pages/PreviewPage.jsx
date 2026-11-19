@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 
 import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
 import toBinaryImage from "../BinaryImage/toBinaryImage.js";
@@ -12,9 +12,9 @@ export default function PreviewPage() {
     const { videoPath } = useParams();
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
-    
+
     // Get image
-    const {image, loading, error} = useFetchThumbnail(videoPath);
+    const { image, loading, error } = useFetchThumbnail(videoPath);
 
     // Make binarized image, only different on render.
     const hexColor = parseInt(color.slice(1), 16);
@@ -23,6 +23,9 @@ export default function PreviewPage() {
     return (
         <>
             <main>
+                <nav>
+                    <Link to="/videos">Back</Link>
+                </nav>
                 <h1>Video Processor App</h1>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
                 <Preview loading={loading} error={error}>
