@@ -15,9 +15,11 @@ export default function Videos() {
     return (
         <main>
             <h1>Videos</h1>
-            <ul>
-                {videos.length > 0 && videos.map((videoName, idx) => <VideoEntry key={idx} name={videoName} />)}
-            </ul>
+            <div className="videos-container">
+                <ul>
+                    {videos.length > 0 && videos.map((videoName, idx) => <VideoEntry key={idx} name={videoName} />)}
+                </ul>
+            </div>
         </main>
     )
 }
