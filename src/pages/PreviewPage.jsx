@@ -53,7 +53,7 @@ export default function PreviewPage() {
                     <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
-                <ProcessButton handelClick={handleClick}/>
+                <ProcessButton handleClick={handleClick}/>
             </main>
         </>
     )
