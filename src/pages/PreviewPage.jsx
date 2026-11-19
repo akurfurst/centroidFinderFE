@@ -9,11 +9,15 @@ import ImagePreview from "../components/ImagePreview.jsx";
 import Preview from "../components/Preview.jsx";
 import groupFinder from "../BinaryImage/groupFinder.js";
 import ProcessButton from "../components/ProcessButton.jsx";
+import { useFetchPost } from "../hooks/useFetchPost.js";
 
 export default function PreviewPage() {
     const { videoPath } = useParams();
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
+
+    const [url, setUrl] = useState(null);
+    const {data, error: postError} = useFetchPost(url); 
 
     // Get image
     const { image, loading, error } = useFetchThumbnail(videoPath);
@@ -38,7 +42,7 @@ export default function PreviewPage() {
                     <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
-                <ProcessButton videoPath={videoPath} targetColor={hexColor} threshold={threshold}/>
+                <ProcessButton videoPath={videoPath} targetColor={hexColor} threshold={threshold} setUrl={setUrl} error={postError}/>
             </main>
         </>
     )
