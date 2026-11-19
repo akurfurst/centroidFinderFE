@@ -23,7 +23,7 @@ export default function PreviewPage() {
     const { image, loading, error } = useFetchThumbnail(videoPath);
 
     // Make binarized image, only different on render.
-    const heexColor = color.slice(1);
+    const hexColor = color.slice(1);
     const numberColor = parseInt(color.slice(1), 16);
     const binarizedImage = (image == null) ? null : toBinaryImage(image, numberColor, threshold);
 
@@ -34,7 +34,7 @@ export default function PreviewPage() {
     //handle process click
     async function handleClick(){
         try {
-            const res = await fetch(`/process/${videoPath}?targetColor=${heexColor}&threshold=${threshold}`, { method: "POST"});
+            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`, { method: "POST"});
             if (!res.ok) throw new Error("Post failed: " + res.status);
             const { jobId } = await res.json();
             setJobId(jobId);
