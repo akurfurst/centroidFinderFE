@@ -32,11 +32,11 @@ export default function PreviewPage() {
                     <Link to="/videos">Back</Link>
                 </nav>
                 <h1>Video Processor App</h1>
-                <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
                 <Preview loading={loading} error={error}>
                     <ImagePreview image={image} largestCentroid={largestCentroid} />
                     <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
+                <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
             </main>
         </>
     )
