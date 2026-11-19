@@ -8,6 +8,7 @@ import Controls from "../components/Controls.jsx";
 import ImagePreview from "../components/ImagePreview.jsx";
 import Preview from "../components/Preview.jsx";
 import groupFinder from "../BinaryImage/groupFinder.js";
+import ProcessButton from "../components/ProcessButton.jsx";
 
 export default function PreviewPage() {
     const { videoPath } = useParams();
@@ -37,6 +38,7 @@ export default function PreviewPage() {
                     <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
+                <ProcessButton videoPath={videoPath} targetColor={hexColor} threshold={threshold}/>
             </main>
         </>
     )
