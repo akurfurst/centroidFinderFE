@@ -9,14 +9,15 @@ import ImagePreview from "../components/ImagePreview.jsx";
 import Preview from "../components/Preview.jsx";
 import groupFinder from "../BinaryImage/groupFinder.js";
 import ProcessButton from "../components/ProcessButton.jsx";
-import { useFetchPost } from "../hooks/useFetchPost.js";
+import useFetchStatusInterval from "../hooks/useFetchStatusInterval.js";
 
 export default function PreviewPage() {
     const { videoPath } = useParams();
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
 
-    const [jobId, setJobId] = useState(""); 
+    const [jobId, setJobId] = useState();
+    const { status, setStatus, result } = useFetchStatusInterval(jobId);
 
     // Get image
     const { image, loading, error } = useFetchThumbnail(videoPath);
@@ -32,10 +33,12 @@ export default function PreviewPage() {
     //handle process click
     async function handleClick(){
         try {
-            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`);
-            if (!res.ok) throw new Error("Post failed");
+            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`, { method: "POST"});
+            if (!res.ok) throw new Error("Post failed: " + res.status);
             const { jobId } = await res.json();
             setJobId(jobId);
+            setStatus("processing");
+
         } catch(e) {
             console.error(e);
         }
@@ -54,6 +57,11 @@ export default function PreviewPage() {
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
                 <ProcessButton handleClick={handleClick}/>
+                { status == "done" ? <a target="_blank" href={`http://localhost:4002${result}`}>Download CSV</a> 
+                    : status == "error" ? <p>Error processing video, please try again.</p> 
+                    : status == "processing" ? <p>Please wait, processing...</p> 
+                    : null
+                }
             </main>
         </>
     )
