@@ -7,6 +7,7 @@ import toBinaryImage from "../BinaryImage/toBinaryImage.js";
 import Controls from "../components/Controls.jsx";
 import ImagePreview from "../components/ImagePreview.jsx";
 import Preview from "../components/Preview.jsx";
+import groupFinder from "../BinaryImage/groupFinder.js";
 
 export default function PreviewPage() {
     const { videoPath } = useParams();
@@ -20,6 +21,10 @@ export default function PreviewPage() {
     const hexColor = parseInt(color.slice(1), 16);
     const binarizedImage = (image == null) ? null : toBinaryImage(image, hexColor, threshold);
 
+    // Get centroids to draw circle at largest centroid.
+    const centroids = (image == null) ? null : groupFinder(image, hexColor, threshold);
+    const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
+
     return (
         <>
             <main>
@@ -29,8 +34,8 @@ export default function PreviewPage() {
                 <h1>Video Processor App</h1>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
                 <Preview loading={loading} error={error}>
-                    <ImagePreview image={image} />
-                    <ImagePreview image={binarizedImage} />
+                    <ImagePreview image={image} largestCentroid={largestCentroid} />
+                    <ImagePreview image={binarizedImage} largestCentroid={largestCentroid} />
                 </Preview>
             </main>
         </>
