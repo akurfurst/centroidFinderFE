@@ -1,4 +1,5 @@
 import useFetchVideos from "../hooks/useFetchVideos";
+import VideoEntry from "../components/VideoEntry";
 
 export default function Videos() {
     const { videos, loading, error } = useFetchVideos();
@@ -15,7 +16,7 @@ export default function Videos() {
         <>
             <h1>Videos</h1>
             <ul>
-                {videos.length > 0 && videos.map((videoName,idx) => <li key={idx}>{videoName}</li>)}
+                {videos.length > 0 && videos.map((videoName, idx) => <VideoEntry key={idx} name={videoName} />)}
             </ul>
         </>
     )
