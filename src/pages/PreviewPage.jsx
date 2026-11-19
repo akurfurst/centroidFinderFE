@@ -16,8 +16,7 @@ export default function PreviewPage() {
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
 
-    const [url, setUrl] = useState(null);
-    const {data, error: postError} = useFetchPost(url); 
+    const [jobId, setJobId] = useState(""); 
 
     // Get image
     const { image, loading, error } = useFetchThumbnail(videoPath);
@@ -31,8 +30,15 @@ export default function PreviewPage() {
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
 
     //handle process click
-    function handleClick(){
-        setUrl(`http://localhost:4002/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`)
+    async function handleClick(){
+        try {
+            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`);
+            if (!res.ok) throw new Error("Post failed");
+            const { jobId } = await res.json();
+            setJobId(jobId);
+        } catch(e) {
+            console.error(e);
+        }
     }
 
     return (
@@ -48,7 +54,6 @@ export default function PreviewPage() {
                 </Preview>
                 <Controls setTargetColor={setTargetColor} threshold={threshold} setThreshold={setThreshold} />
                 <ProcessButton handelClick={handleClick}/>
-                {postError && <p>Error: {postError}</p>}
             </main>
         </>
     )
