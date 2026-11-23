@@ -1,6 +1,18 @@
 import { getBinaryArray } from "./toBinaryImage";
 
-//returns a list of centroids as objects [{x, y, size}]
+/**
+ * Finds a list of Groups
+ * Groups are represented as an object 
+ * where x and y represent the location of the group, 
+ * and size represents the size of the group.
+ * 
+ * Expects a hexadecimal number for targetColor
+ * 
+ * @param {Array} image 
+ * @param {number} targetColor 
+ * @param {number} threshold 
+ * @returns list of groups
+ */
 export default function groupFinder(image, targetColor, threshold){
     const clusters = [];
     const visited = new Set();
@@ -15,7 +27,16 @@ export default function groupFinder(image, targetColor, threshold){
     }
     return clusters.sort((a, b) => b.size - a.size || b.x - a.x || b.y - a.y);
 }
-//returns the centroid at the starting location {x, y, size}
+/**
+ * 
+ * Returns a new group from a starting x and y value.
+ * 
+ * @param {Array} image 
+ * @param {number} startX 
+ * @param {number} startY 
+ * @param {Set} visited 
+ * @returns the group at the starting location 
+ */
 function dfs(image, startX, startY, visited){
     let totalX = 0;
     let totalY = 0;
@@ -32,13 +53,21 @@ function dfs(image, startX, startY, visited){
         size++;
         for(let next of possibleMoves(image, x, y)) stack.push(next);
     }
+    // Find the Centroid of the group
     const avgX = Math.floor(totalX / size);
     const avgY = Math.floor(totalY / size);
 
     return {x: avgX, y: avgY, size};
 }
 
-//returns a list of valid moves at current x and y [[x, y]]
+/**
+ * Returns a list of valid x and y coordinates adjacent to the given.
+ * 
+ * @param {Array} image 
+ * @param {number} currX 
+ * @param {number} currY 
+ * @returns the valid moves adjacent to the current.
+ */
 function possibleMoves(image, currX, currY){
     const moves = [];
     const directions = [
