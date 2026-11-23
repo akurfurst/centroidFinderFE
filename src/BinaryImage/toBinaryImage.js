@@ -1,17 +1,40 @@
 import { Image } from "image-js";
 import distance from "./colorDistance";
 
+/**
+ * Converts an image into a binarized version.
+ * 
+ * @param {Image} image 
+ * @param {number} targetColor 
+ * @param {number} threshold 
+ * @returns 
+ */
 export default function toBinaryImage(image, targetColor, threshold){
     const binaryArray = toBinaryArray(image, targetColor, threshold);
     const binaryImage = toImage(binaryArray);
-    //console.log(targetColor);
     return binaryImage;
 }
 
+/**
+ * Converts an image into a binary array
+ * 
+ * @param {Image} image 
+ * @param {number} targetColor 
+ * @param {number} threshold 
+ * @returns a binary array
+ */
 export function getBinaryArray(image, targetColor, threshold){
     return toBinaryArray(image, targetColor, threshold);
 }
 
+/**
+ * Converts an image into a binary array
+ * 
+ * @param {Image} image 
+ * @param {number} targetColor 
+ * @param {number} threshold 
+ * @returns a binary array
+ */
 function toBinaryArray(image, targetColor, threshold){ 
     const binaryArray = [];
 
@@ -28,6 +51,14 @@ function toBinaryArray(image, targetColor, threshold){
     return binaryArray;
 }
 
+/**
+ * Converts a binary array into an image
+ * Values of 1 result in a Pure White (255,255,255) pixel
+ * Values of 0 result in a Pure Black (000,000,000) pixel
+ * 
+ * @param {Array} binaryArray 
+ * @returns a binary image
+ */
 function toImage(binaryArray){
     const height = binaryArray.length;
     const width = binaryArray[0].length;
