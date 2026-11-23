@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 
 import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
@@ -15,6 +15,20 @@ export default function PreviewPage() {
     const { videoPath } = useParams();
     const [color, setTargetColor] = useState("#000000");
     const [threshold, setThreshold] = useState(0);
+    const [previewThreshold, setPreviewThreshold] = useState(threshold);
+
+    // only render preview image 10 times a second
+    const latestThreshold = useRef(threshold);
+    useEffect(() => {
+        latestThreshold.current = threshold;
+    }, [threshold]);
+
+    useEffect(() => {
+      const timer = setInterval(() => {
+        setPreviewThreshold(latestThreshold.current);
+      }, 100);
+      return () => clearInterval(timer);
+    }, [previewThreshold]);
 
     const [jobId, setJobId] = useState();
     const { status, setStatus, result } = useFetchStatusInterval(jobId);
@@ -25,16 +39,16 @@ export default function PreviewPage() {
     // Make binarized image, only different on render.
     const hexColor = color.slice(1);
     const numberColor = parseInt(color.slice(1), 16);
-    const binarizedImage = (image == null) ? null : toBinaryImage(image, numberColor, threshold);
+    const binarizedImage = (image == null) ? null : toBinaryImage(image, numberColor, previewThreshold);
 
     // Get centroids to draw circle at largest centroid.
-    const centroids = (image == null) ? null : groupFinder(image, numberColor, threshold);
+    const centroids = (image == null) ? null : groupFinder(image, numberColor, previewThreshold);
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
 
     //handle process click
     async function handleClick(){
         try {
-            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`, { method: "POST"});
+            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${previewThreshold}`, { method: "POST"});
             if (!res.ok) throw new Error("Post failed: " + res.status);
             const { jobId } = await res.json();
             setJobId(jobId);
