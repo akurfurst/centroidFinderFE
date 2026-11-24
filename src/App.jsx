@@ -4,7 +4,13 @@ import PreviewPage from "./pages/PreviewPage.jsx";
 import Videos from "./pages/Videos.jsx";
 
 
-
+/**
+ * The routes of the application.
+ * 
+ * All pages are routed through App
+ * 
+ * @returns {JSX.Element}
+ */
 function App() {
   
   return (
