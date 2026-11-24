@@ -1,10 +1,9 @@
-import { getBinaryArray } from "./toBinaryImage";
+
 
 //returns a list of centroids as objects [{x, y, size}]
-export default function groupFinder(image, targetColor, threshold){
+export default function groupFinder(binaryArray){
     const clusters = [];
     const visited = new Set();
-    const binaryArray = getBinaryArray(image, targetColor, threshold);
     for(let y = 0; y < binaryArray.length; y++){
         for(let x = 0; x < binaryArray[0].length; x++){
             const current = `${x} ${y}`;

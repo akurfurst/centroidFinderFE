@@ -44,10 +44,10 @@ export default function PreviewPage() {
     const binaryArray = (image == null) ? null : getBinaryArray(image, numberColor, previewThreshold);
 
     // Make binarized image, only different on render.
-    const binarizedImage = (image == null) ? null : toBinaryImage(binaryArray, numberColor, previewThreshold);
+    const binarizedImage = (image == null) ? null : toBinaryImage(binaryArray);
 
     // Get centroids to draw circle at largest centroid.
-    const centroids = (image == null) ? null : groupFinder(binaryArray, numberColor, previewThreshold);
+    const centroids = (image == null) ? null : groupFinder(binaryArray);
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
 
     //handle process click
