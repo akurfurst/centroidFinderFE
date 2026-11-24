@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Makes a POST request, tracking the result and status of the request.
+ * 
+ * @param {string} url The URL to POST to 
+ * @param {*} initialData The initial value of the response
+ * 
+ * @typedef {object} PostStatus
+ * @property {*} data The response body, initialized as initialData
+ * @property {boolean} loading Whether a response is in progress
+ * @property {string | null} error The error message, or null if no error has occured
+ * 
+ * @returns {PostStatus} Response body and Request status
+ */
 export function useFetchPost(url, initialData) {
     const [data, setData] = useState(initialData);
     const [loading, setLoading] = useState(true);
