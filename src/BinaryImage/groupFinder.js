@@ -8,9 +8,9 @@ import { getBinaryArray } from "./toBinaryImage";
  * 
  * Expects a hexadecimal number for targetColor
  * 
- * @param {Array} image 
- * @param {number} targetColor 
- * @param {number} threshold 
+ * @param {import('image-js').Image} image The image to find the groups of 
+ * @param {number} targetColor A hexadecimal target color
+ * @param {number} threshold The maximum distance a color can be from the target (exclusive)
  * @returns list of groups
  */
 export default function groupFinder(image, targetColor, threshold){
@@ -31,10 +31,10 @@ export default function groupFinder(image, targetColor, threshold){
  * 
  * Returns a new group from a starting x and y value.
  * 
- * @param {Array} image 
- * @param {number} startX 
- * @param {number} startY 
- * @param {Set} visited 
+ * @param {Array} image A binary array
+ * @param {number} startX The starting x value of the array
+ * @param {number} startY The starting y value of the array
+ * @param {Set} visited The visited coordinates
  * @returns the group at the starting location 
  */
 function dfs(image, startX, startY, visited){
@@ -63,9 +63,9 @@ function dfs(image, startX, startY, visited){
 /**
  * Returns a list of valid x and y coordinates adjacent to the given.
  * 
- * @param {Array} image 
- * @param {number} currX 
- * @param {number} currY 
+ * @param {Array} image A binary array
+ * @param {number} currX The current x
+ * @param {number} currY The current y
  * @returns the valid moves adjacent to the current.
  */
 function possibleMoves(image, currX, currY){
