@@ -1,9 +1,9 @@
 import { Image } from "image-js";
 import distance from "./colorDistance";
 
-export default function toBinaryImage(image, targetColor, threshold){
-    const binaryArray = toBinaryArray(image, targetColor, threshold);
-    const binaryImage = toImage(binaryArray);
+export default function toBinaryImage(image){
+    //const binaryArray = toBinaryArray(image, targetColor, threshold);
+    const binaryImage = toImage(image);
     //console.log(targetColor);
     return binaryImage;
 }

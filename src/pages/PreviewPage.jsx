@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router";
 
 import useFetchThumbnail from "../hooks/useFetchThumbnail.js";
-import toBinaryImage from "../BinaryImage/toBinaryImage.js";
+import toBinaryImage, { getBinaryArray } from "../BinaryImage/toBinaryImage.js";
 
 import Controls from "../components/Controls.jsx";
 import ImagePreview from "../components/ImagePreview.jsx";
@@ -36,13 +36,18 @@ export default function PreviewPage() {
     // Get image
     const { image, loading, error } = useFetchThumbnail(videoPath);
 
-    // Make binarized image, only different on render.
+    //get number color and hex color
     const hexColor = color.slice(1);
     const numberColor = parseInt(color.slice(1), 16);
-    const binarizedImage = (image == null) ? null : toBinaryImage(image, numberColor, previewThreshold);
+
+    //Get binary image
+    const binaryArray = (image == null) ? null : getBinaryArray(image, numberColor, previewThreshold);
+
+    // Make binarized image, only different on render.
+    const binarizedImage = (image == null) ? null : toBinaryImage(binaryArray, numberColor, previewThreshold);
 
     // Get centroids to draw circle at largest centroid.
-    const centroids = (image == null) ? null : groupFinder(image, numberColor, previewThreshold);
+    const centroids = (image == null) ? null : groupFinder(binaryArray, numberColor, previewThreshold);
     const largestCentroid = (centroids == null || centroids.length === 0) ? null : centroids[0];
 
     //handle process click
