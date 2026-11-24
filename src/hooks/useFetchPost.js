@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
  * @typedef {object} PostStatus
  * @property {*} data The response body, initialized as initialData
  * @property {boolean} loading Whether a response is in progress
- * @property {string | null} error The error message, or null if no error has occured
+ * @property {string | null} error The error message, or null if no error has occurred
  * 
  * @returns {PostStatus} Response body and Request status
  */
