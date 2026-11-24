@@ -4,10 +4,10 @@ import distance from "./colorDistance";
 /**
  * Converts an image into a binarized version.
  * 
- * @param {Image} image 
- * @param {number} targetColor 
- * @param {number} threshold 
- * @returns 
+ * @param {Image} image The image to binarize
+ * @param {number} targetColor The target color
+ * @param {number} threshold The maximum distance the color can be from the target
+ * @returns A binary Image
  */
 export default function toBinaryImage(image, targetColor, threshold){
     const binaryArray = toBinaryArray(image, targetColor, threshold);
@@ -18,9 +18,9 @@ export default function toBinaryImage(image, targetColor, threshold){
 /**
  * Converts an image into a binary array
  * 
- * @param {Image} image 
- * @param {number} targetColor 
- * @param {number} threshold 
+ * @param {Image} image The image to convert
+ * @param {number} targetColor The target color of the image
+ * @param {number} threshold The distance the color can be
  * @returns a binary array
  */
 export function getBinaryArray(image, targetColor, threshold){
