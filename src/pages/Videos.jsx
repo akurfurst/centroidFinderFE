@@ -1,6 +1,16 @@
 import useFetchVideos from "../hooks/useFetchVideos";
 import VideoEntry from "../components/VideoEntry";
 
+/**
+ * The page for showing every processable video
+ * Videos are fetched from the back-end
+ * 
+ * Updates to show the page is either loading or failed to get the videos
+ * 
+ * Each video is created as a VideoEntry
+ * 
+ * @returns {JSX.Element}
+ */
 export default function Videos() {
     const { videos, loading, error } = useFetchVideos();
 
