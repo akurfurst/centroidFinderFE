@@ -6,9 +6,9 @@ import { writeCanvas } from "image-js";
  * Shows an image, placing a circle over the centroid of the largest group
  * 
  * @typedef {object} Group
- * @property {number} x
- * @property {number} y
- * @property {number} size
+ * @property {number} x Centroid x coordinate
+ * @property {number} y Centroid y coordinate
+ * @property {number} size Size of group
  * 
  * @typedef {object} ImageProps
  * @property {import('image-js').Image} image The image to show on the canvas
