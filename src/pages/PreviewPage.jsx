@@ -40,7 +40,7 @@ export default function PreviewPage() {
     const hexColor = color.slice(1);
     const numberColor = parseInt(color.slice(1), 16);
 
-    //Get binary image
+    //Get binary array
     const binaryArray = (image == null) ? null : getBinaryArray(image, numberColor, previewThreshold);
 
     // Make binarized image, only different on render.
