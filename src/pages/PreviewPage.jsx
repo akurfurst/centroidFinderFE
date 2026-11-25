@@ -28,7 +28,7 @@ export default function PreviewPage() {
         setPreviewThreshold(latestThreshold.current);
       }, 100);
       return () => clearInterval(timer);
-    }, [previewThreshold]);
+    }, []);
 
     const [jobId, setJobId] = useState();
     const { status, setStatus, result } = useFetchStatusInterval(jobId);
@@ -53,7 +53,7 @@ export default function PreviewPage() {
     //handle process click
     async function handleClick(){
         try {
-            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${previewThreshold}`, { method: "POST"});
+            const res = await fetch(`/process/${videoPath}?targetColor=${hexColor}&threshold=${threshold}`, { method: "POST"});
             if (!res.ok) throw new Error("Post failed: " + res.status);
             const { jobId } = await res.json();
             setJobId(jobId);
