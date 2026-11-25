@@ -1,8 +1,17 @@
 
+// The limit of the slider, NOT the limit of the threshold.
 const MAX_THRESHOLD = 256;
 
-export default function Threshold({ threshold, setThreshold }) {
 
+/**
+ * 
+ * @typedef {object} ThresholdProps
+ * @property {number} threshold The threshold of the processor
+ * @property {Function} setThreshold Sets the threshold
+ *   
+ * @returns {JSX.Element}
+ */
+export default function Threshold({ threshold, setThreshold }) {
 
     return (
         <div>

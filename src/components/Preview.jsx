@@ -1,4 +1,15 @@
 
+/**
+ * A loading & error handler for image previews.
+ * Updates according to the status of fetching a thumbnail on the PreviewPage
+ * 
+ * @typedof {object} PreviewProps
+ * @param {boolean} loading Whether the preview is loading
+ * @param {boolean} error Whether the preview errored
+ * @param {object} children The images to be previewed
+ *  
+ * @returns {JSX.Element}
+ */
 export default function Preview({loading, error, children }) {
     if (loading) return (
         <p>Loading...</p>

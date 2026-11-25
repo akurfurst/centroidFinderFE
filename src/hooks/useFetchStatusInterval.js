@@ -1,5 +1,21 @@
 import { useEffect, useState } from "react"
 
+/**
+ * Periodically makes a GET request to the back-end, getting the status of the given jobId.
+ * 
+ * Clears interval on 'error', 'done' or an unknown status.
+ * Does not set error on unknown status
+ * Failed requests / network errors do not cancel
+ * 
+ * @param {string} jobId The UUID of the job to check
+ * 
+ * @typedef {object} JobStatus
+ * @property {string} status The status of the job
+ * @property {Function} setStatus Sets the status of the job
+ * @property {string} result The output path of the job
+ * 
+ * @returns {JobStatus} The resulting job status
+ */
 export default function useFetchStatusInterval(jobId) {
     const [status, setStatus] = useState("");
     const [result, setResult] = useState("");

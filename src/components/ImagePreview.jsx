@@ -2,20 +2,35 @@ import { useEffect, useRef } from "react";
 import { writeCanvas } from "image-js";
 
 
+/**
+ * Shows an image, placing a circle over the centroid of the largest group
+ * 
+ * @typedef {object} Group
+ * @property {number} x Centroid x coordinate
+ * @property {number} y Centroid y coordinate
+ * @property {number} size Size of group
+ * 
+ * @typedef {object} ImageProps
+ * @property {import('image-js').Image} image The image to show on the canvas
+ * @property {Group} largestCentroid The largest group
+ * 
+ * @param {ImageProps} props
+ * @returns {JSX.Element}
+ */
 export default function ImagePreview({image, largestCentroid}){
     const canvasRef = useRef(null); 
     useEffect(() => {
         const canvas = canvasRef.current;
         writeCanvas(image, canvas)    
 
-        //Draw circle around largest centroid
         if(!canvas || !largestCentroid){
             return
         }
-
+        
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         writeCanvas(image, canvas);
+        // Draw circle around largest centroid
         ctx.beginPath();
         ctx.arc(largestCentroid.x, largestCentroid.y, 20, 0, Math.PI * 2);
         ctx.strokeStyle = '#199a19d8';

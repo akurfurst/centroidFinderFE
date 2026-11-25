@@ -1,6 +1,18 @@
 import { getBinaryArray } from "./toBinaryImage";
 
-//returns a list of centroids as objects [{x, y, size}]
+/**
+ * Finds a list of Groups
+ * Groups are represented as an object 
+ * where x and y represent the location of the group, 
+ * and size represents the size of the group.
+ * 
+ * Expects a hexadecimal number for targetColor
+ * 
+ * @param {import('image-js').Image} image The image to find the groups of 
+ * @param {number} targetColor A hexadecimal target color
+ * @param {number} threshold The maximum distance a color can be from the target (exclusive)
+ * @returns list of groups
+ */
 export default function groupFinder(image, targetColor, threshold){
     const clusters = [];
     const visited = new Set();
@@ -15,7 +27,16 @@ export default function groupFinder(image, targetColor, threshold){
     }
     return clusters.sort((a, b) => b.size - a.size || b.x - a.x || b.y - a.y);
 }
-//returns the centroid at the starting location {x, y, size}
+/**
+ * 
+ * Returns a new group from a starting x and y value.
+ * 
+ * @param {Array} image A binary array
+ * @param {number} startX The starting x value of the array
+ * @param {number} startY The starting y value of the array
+ * @param {Set} visited The visited coordinates
+ * @returns the group at the starting location 
+ */
 function dfs(image, startX, startY, visited){
     let totalX = 0;
     let totalY = 0;
@@ -32,13 +53,21 @@ function dfs(image, startX, startY, visited){
         size++;
         for(let next of possibleMoves(image, x, y)) stack.push(next);
     }
+    // Find the Centroid of the group
     const avgX = Math.floor(totalX / size);
     const avgY = Math.floor(totalY / size);
 
     return {x: avgX, y: avgY, size};
 }
 
-//returns a list of valid moves at current x and y [[x, y]]
+/**
+ * Returns a list of valid x and y coordinates adjacent to the given.
+ * 
+ * @param {Array} image A binary array
+ * @param {number} currX The current x
+ * @param {number} currY The current y
+ * @returns the valid moves adjacent to the current.
+ */
 function possibleMoves(image, currX, currY){
     const moves = [];
     const directions = [

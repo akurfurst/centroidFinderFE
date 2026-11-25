@@ -1,5 +1,16 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Makes a GET request to the back-end for processable videos.
+ * 
+ * 
+ * @typedef {object} FetchStatus
+ * @property {Array} videos A list of processable videos
+ * @property {boolean} loading Whether a request is in progress
+ * @property {string | null} error The error message, or null if no error has occurred
+ *  
+ * @returns {FetchStatus} The status and result of the GET request
+ */
 export default function useFetchVideos() {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
